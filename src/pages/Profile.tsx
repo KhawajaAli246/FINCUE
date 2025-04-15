@@ -1,6 +1,7 @@
-
 import React from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Button } from "@/components/ui/button";
+import { ChevronLeft } from "lucide-react";
 import AccountSettings from "@/components/profile/AccountSettings";
 import BillingSettings from "@/components/profile/BillingSettings";
 import NotificationSettings from "@/components/profile/NotificationSettings";
@@ -22,12 +23,19 @@ const Profile: React.FC = () => {
 
   return (
     <div className="container mx-auto py-8 max-w-5xl">
+      <Button
+        onClick={() => navigate("/")}
+        className="button-glow bg-primary text-primary-foreground mb-2"
+      >
+        <ChevronLeft className="mr-1 h-4 w-4" />
+        <span className="hidden sm:inline">Go Back</span>
+      </Button>
       <h1 className="text-3xl font-semibold mb-6">Account</h1>
-      
+
       <Card className="p-6 shadow-md">
-        <Tabs 
-          defaultValue={defaultTab} 
-          className="w-full" 
+        <Tabs
+          defaultValue={defaultTab}
+          className="w-full"
           onValueChange={handleTabChange}
         >
           <TabsList className="grid grid-cols-5 mb-8">
@@ -37,23 +45,23 @@ const Profile: React.FC = () => {
             <TabsTrigger value="notifications">Notifications</TabsTrigger>
             <TabsTrigger value="help">Help & Support</TabsTrigger>
           </TabsList>
-          
+
           <TabsContent value="profile">
             <UserProfile />
           </TabsContent>
-          
+
           <TabsContent value="settings">
             <AccountSettings />
           </TabsContent>
-          
+
           <TabsContent value="billing">
             <BillingSettings />
           </TabsContent>
-          
+
           <TabsContent value="notifications">
             <NotificationSettings />
           </TabsContent>
-          
+
           <TabsContent value="help">
             <HelpSupport />
           </TabsContent>

@@ -42,7 +42,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         <div className="flex items-center justify-between h-16 px-6 border-b">
           {isOpen && (
             <div className="flex items-center gap-2">
-              <CircleDollarSign className="h-6 w-6 text-action" />
+              <CircleDollarSign className="h-6 w-6 text-white" />
               <span className="text-lg font-semibold">Fincue</span>
             </div>
           )}

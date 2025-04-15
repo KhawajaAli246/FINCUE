@@ -32,6 +32,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useToast } from "@/hooks/use-toast";
+import DatePicker from "@/components/ui/datepicker";
 
 // Define form schema
 const transactionSchema = z.object({
@@ -53,6 +54,9 @@ const transactionSchema = z.object({
       "Price must be a positive number"
     ),
   date: z.string().min(1, "Date is required"),
+  assetType: z.enum(["Crypto", "Stock", "ETF", "Other"], {
+    required_error: "Asset type is required",
+  }),
 });
 
 type TransactionFormValues = z.infer<typeof transactionSchema>;
@@ -71,6 +75,7 @@ export function AddTransactionDialog() {
       quantity: "",
       price: "",
       date: new Date().toISOString().split("T")[0],
+      assetType: "Stock", // Default value for asset type
     },
   });
 
@@ -175,7 +180,52 @@ export function AddTransactionDialog() {
                   <FormItem>
                     <FormLabel className="text-foreground/80">Date</FormLabel>
                     <FormControl>
-                      <Input type="date" {...field} className="glass-effect" />
+                      <DatePicker />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+
+            <div className="grid grid-cols-2 gap-6">
+              <FormField
+                control={form.control}
+                name="assetType"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-foreground/80">
+                      Asset Type
+                    </FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger className="glass-effect">
+                          <SelectValue placeholder="Select asset type" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        <SelectItem value="Crypto">Crypto</SelectItem>
+                        <SelectItem value="Stock">Stock</SelectItem>
+                        <SelectItem value="ETF">ETF</SelectItem>
+                        <SelectItem value="Other">Other</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="ticker"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-foreground/80">Ticker</FormLabel>
+                    <FormControl>
+                      <Input {...field} className="glass-effect" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -219,22 +269,6 @@ export function AddTransactionDialog() {
 
               <FormField
                 control={form.control}
-                name="ticker"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-foreground/80">Ticker</FormLabel>
-                    <FormControl>
-                      <Input {...field} className="glass-effect" />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-
-            <div className="grid grid-cols-2 gap-6">
-              <FormField
-                control={form.control}
                 name="quantity"
                 render={({ field }) => (
                   <FormItem>
@@ -254,7 +288,9 @@ export function AddTransactionDialog() {
                   </FormItem>
                 )}
               />
+            </div>
 
+            <div className="grid grid-cols-2 gap-6">
               <FormField
                 control={form.control}
                 name="price"
