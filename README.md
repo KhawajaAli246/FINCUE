@@ -81,13 +81,13 @@ A modern, responsive financial portfolio dashboard web application designed for 
 1. Clone the repository:
 
 ```
-git clone https://github.com/your-username/financial-portfolio-dashboard.git
+git clone https://github.com/KhawajaAli246/FINCUE.git
 ```
 
 2. Navigate to the project directory:
 
 ```
-cd financial-portfolio-dashboard
+cd Fincue
 ```
 
 3. Install dependencies:
@@ -102,29 +102,4 @@ npm install
 npm run dev
 ```
 
-5. Open your browser and visit http://localhost:5173
-
-## Customization
-
-### Theming
-
-The application uses a soft, muted color palette with primary emerald green (#4ADE80) for success highlights and cool blue (#60A5FA) for actions and navigation. You can customize the color scheme in the Tailwind configuration file.
-
-### Data Sources
-
-Currently, the application uses mock data for demonstration purposes. To connect to real financial data APIs, you would need to update the data fetching logic in the respective components.
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## Acknowledgments
-
-- Design inspired by modern financial applications and trading platforms
-- Icons provided by Lucide React
-- Chart components built with Recharts
-- UI components from Shadcn UI library
-
----
-
-Built with ❤️ for investors who value data-driven decision making.
+5. Open your browser and visit http://localhost:8080
